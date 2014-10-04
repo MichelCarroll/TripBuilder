@@ -12312,10 +12312,5 @@ namespace {
     }
 
 
-    class Moloquent extends \Jenssegers\Mongodb\Model{
-        
-    }
-
-
 }
 

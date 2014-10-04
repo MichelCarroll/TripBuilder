@@ -32,6 +32,8 @@ class MongoSchema extends Command {
                 $collection->unique('code');
             });
             
+            Schema::create('trips');
+            
             $this->info("Finished building the mongo schema");
 	}
 }

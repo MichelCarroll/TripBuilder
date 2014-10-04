@@ -20,17 +20,13 @@ Route::get('/', function()
 Route::get('/airports', 'AirportsController@getAll');
 
 // fetching trip and associated flights
-Route::get('/trips/{id}', function($id)
-{
-    var_dump('show trip');
-    var_dump($id);
-})->where('id', '[0-9]+');
+Route::get('/trips/{id}', 'TripsController@get')->where('id', '[a-z0-9]+');
 
-Route::put('/trips/{id}', function($id)
-{
-    var_dump('put trip');
-    var_dump($id);
-})->where('id', '[0-9]+');
+// fetching trip and associated flights
+Route::post('/trips', 'TripsController@create');
+
+// update a trip
+Route::put('/trips/{id}', 'TripsController@update')->where('id', '[a-z0-9]+');
 
 Route::get('/trips/{id}/flights/{src},{trg}', function($id, $src, $trg)
 {
