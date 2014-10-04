@@ -8,7 +8,7 @@ class MongoTripRepository implements TripRepositoryInterface  {
      * @param string $id
      * @return Trip
      */
-    public function getOne($id)
+    public function findOne($id)
     {
         return Trip::find($id);
     }

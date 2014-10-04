@@ -16,9 +16,7 @@ class AirportsController extends BaseController {
     {
         $airports = $this->airportRepository->retrieveAllAirports();
 
-        $response = Response::make(json_encode($airports), 200);
-        $response->header('Content-Type', 'application/json');
-        return $response;
+        return JsonResponse::make($airports);
     }
 
 }
