@@ -19,27 +19,19 @@ Route::get('/', function()
 // fetching all airports
 Route::get('/airports', 'AirportsController@getAll');
 
-// fetching trip and associated flights
-Route::get('/trips/{id}', 'TripsController@get')->where('id', '[a-z0-9]+');
+// creating trip
+Route::post('/trips', 'TripsController@create');
 
 // fetching trip and associated flights
-Route::post('/trips', 'TripsController@create');
+Route::get('/trips/{id}', 'TripsController@get')->where('id', '[a-z0-9]+');
 
 // update a trip
 Route::put('/trips/{id}', 'TripsController@update')->where('id', '[a-z0-9]+');
 
-Route::get('/trips/{id}/flights/{src},{trg}', function($id, $src, $trg)
-{
-    var_dump('put flight');
-    var_dump($id);
-    var_dump($src);
-    var_dump($trg);
-})->where(['id' => '[0-9]+', 'src' => '[A-Z]+', 'trg' => '[A-Z]+']);
+// adding a flight to a trip
+Route::put('/trips/{id}/flights/{src},{trg}', 'FlightsController@create')
+    ->where(['id' => '[a-z0-9]+', 'src' => '[A-Z]+', 'trg' => '[A-Z]+']);
 
-Route::delete('/trips/{id}/flights/{src},{trg}', function($id, $src, $trg)
-{
-    var_dump('delete flight');
-    var_dump($id);
-    var_dump($src);
-    var_dump($trg);
-})->where(['id' => '[0-9]+', 'src' => '[A-Z]+', 'trg' => '[A-Z]+']);
+// removing a flight from a trip
+Route::delete('/trips/{id}/flights/{src},{trg}', 'FlightsController@delete')
+    ->where(['id' => '[a-z0-9]+', 'src' => '[A-Z]+', 'trg' => '[A-Z]+']);

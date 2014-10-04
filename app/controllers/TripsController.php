@@ -13,7 +13,7 @@ class TripsController extends BaseController {
     
     public function get($id)
     {
-        $trip = $this->tripRepository->getOne($id);
+        $trip = $this->tripRepository->findOne($id);
 
         if(!$trip) {
             return JsonResponse::make(['error' => 'Trip does not exist'], 404);
@@ -32,7 +32,7 @@ class TripsController extends BaseController {
     
     public function update($id)
     {
-        $trip = $this->tripRepository->getOne($id);
+        $trip = $this->tripRepository->findOne($id);
         
         if(!$trip) {
             return JsonResponse::make(['error' => 'Trip does not exist'], 404);
