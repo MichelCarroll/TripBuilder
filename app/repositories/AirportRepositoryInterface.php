@@ -4,7 +4,8 @@
 interface AirportRepositoryInterface {
 
     
-    public function retrieveAllAirports();
+    public function getAll();
     
+    public function findOne($code);
     
 }

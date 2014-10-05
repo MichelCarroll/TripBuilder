@@ -14,8 +14,7 @@ class AirportsController extends BaseController {
 
     public function getAll()
     {
-        $airports = $this->airportRepository->retrieveAllAirports();
-
+        $airports = $this->airportRepository->getAll();
         return JsonResponse::make($airports);
     }
 

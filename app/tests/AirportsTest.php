@@ -26,7 +26,7 @@ class AirportsTest extends TestCase {
         
         $mock = $this->getMock('AirportRepositoryInterface');
         $mock->expects($this->once())
-            ->method('retrieveAllAirports')
+            ->method('getAll')
             ->will($this->returnValue($data));
         
         $this->app->bind('AirportRepositoryInterface', function() use ($mock) {

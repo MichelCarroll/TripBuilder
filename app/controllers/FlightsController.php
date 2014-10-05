@@ -6,14 +6,30 @@ class FlightsController extends BaseController {
      * @var TripRepositoryInterface 
      */
     private $tripRepository;
+    /**
+     * @var AirportRepositoryInterface 
+     */
+    private $airportRepository;
     
-    public function __construct(TripRepositoryInterface $tripRepository) {
+    public function __construct(TripRepositoryInterface $tripRepository, AirportRepositoryInterface $airportRepository) {
         $this->tripRepository = $tripRepository;
+        $this->airportRepository = $airportRepository;
     }
     
     
     public function create($id, $src, $trg)
     {
+        $srcAirport = $this->airportRepository->findOne($src);
+        $trgAirport = $this->airportRepository->findOne($trg);
+        
+        if(!$srcAirport) {
+            return JsonResponse::make(['error' => 'Source airport does not exist'], 400);
+        }
+        
+        if(!$trgAirport) {
+            return JsonResponse::make(['error' => 'Target airport does not exist'], 400);
+        }
+        
         $trip = $this->tripRepository->findOne($id);
         
         if(!$trip) {
@@ -25,15 +41,21 @@ class FlightsController extends BaseController {
         
         /* @var $flight Flight */
         foreach($existingFlights as $flight) {
-            if($flight->src === $src && $flight->trg === $trg) {
+            if($flight->source->code === $src && $flight->target->code === $trg) {
                 $alreadyExists = true;
                 break;
             }
         }
         
-        if(!$alreadyExists) {
-            $trip->flights()->create(['src' => $src, 'trg' => $trg])->save();
+        if($alreadyExists) {
+            return JsonResponse::make($trip);
         }
+
+        $flight = new Flight();
+        $flight->source()->associate($srcAirport);
+        $flight->target()->associate($trgAirport);
+        $trip->flights()->associate($flight);
+        $trip->save();
                 
         return JsonResponse::make($trip);
     }
@@ -51,7 +73,7 @@ class FlightsController extends BaseController {
         
         /* @var $flight Flight */
         foreach($existingFlights as $flight) {
-            if($flight->src === $src && $flight->trg === $trg) {
+            if($flight->source->code === $src && $flight->target->code === $trg) {
                 $trip->flights()->destroy($flight->_id);
                 break;
             }

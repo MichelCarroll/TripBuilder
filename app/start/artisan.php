@@ -12,3 +12,4 @@
 */
 
 Artisan::add(new MongoSchema());
+Artisan::add(new MongoSeed());

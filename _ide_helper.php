@@ -1,7 +1,7 @@
 <?php
 /**
  * An helper file for Laravel 4, to provide autocomplete information to your IDE
- * Generated for Laravel 4.2.10 on 2014-10-04.
+ * Generated for Laravel 4.2.11 on 2014-10-05.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -3700,16 +3700,6 @@ namespace {
          */
         public static function simplePaginate($perPage = null, $columns = array()){
             return \Illuminate\Database\Eloquent\Builder::simplePaginate($perPage, $columns);
-        }
-        
-        /**
-         * Run the default delete function on the builder.
-         *
-         * @return mixed 
-         * @static 
-         */
-        public static function forceDelete(){
-            return \Illuminate\Database\Eloquent\Builder::forceDelete();
         }
         
         /**
