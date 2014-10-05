@@ -26,6 +26,10 @@ class TripsController extends BaseController {
     {
         $trip = $this->tripRepository->create();
         
+        $name = Input::get('name', 'New Trip');
+        $trip->name = $name;
+        $trip->save();
+        
         return JsonResponse::make($trip);
     }
     
@@ -38,7 +42,11 @@ class TripsController extends BaseController {
             return JsonResponse::make(['error' => 'Trip does not exist'], 404);
         }
         
-        $trip->save();
+        $newName = Input::get('name', null);
+        if($newName) {
+            $trip->name = $newName;
+            $trip->save();
+        }
         
         return JsonResponse::make($trip);
     }
