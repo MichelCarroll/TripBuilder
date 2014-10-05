@@ -36,7 +36,11 @@ class TripsController extends BaseController {
     {
         $trip = $this->tripRepository->create();
         
-        $name = Input::get('name', 'New Trip');
+        $name = Input::get('name');
+        if(!strlen($name)) {
+            $name = 'New Trip';
+        }
+        
         $trip->name = $name;
         $trip->save();
         
