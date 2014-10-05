@@ -33,4 +33,24 @@ class Flight extends Eloquent {
         {
             return $this->embedsOne('Airport');
         }
+        
+        public function setSource(Airport $source)
+        {
+            $this->source()->associate($source);
+        }
+        
+        public function setTarget(Airport $target)
+        {
+            $this->target()->associate($target);
+        }
+        
+        public function getSourceCode()
+        {
+            return $this->source->code;
+        }
+        
+        public function getTargetCode()
+        {
+            return $this->target->code;
+        }
 }

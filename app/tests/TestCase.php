@@ -1,5 +1,6 @@
 <?php
 
+require_once __DIR__.'/MockTrip.php';
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase {
 

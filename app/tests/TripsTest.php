@@ -1,13 +1,5 @@
 <?php
 
-class MockTrip {
-    public $_id;
-    public $name;
-    
-    public function save() {}
-}
-
-
 class TripsTest extends TestCase {
 
     private function _getFakeTrip($id)

@@ -11,7 +11,8 @@ class FlightsController extends BaseController {
      */
     private $airportRepository;
     
-    public function __construct(TripRepositoryInterface $tripRepository, AirportRepositoryInterface $airportRepository) {
+    public function __construct(TripRepositoryInterface $tripRepository, AirportRepositoryInterface $airportRepository) 
+    {
         $this->tripRepository = $tripRepository;
         $this->airportRepository = $airportRepository;
     }
@@ -19,6 +20,10 @@ class FlightsController extends BaseController {
     
     public function create($id, $src, $trg)
     {
+        if($src === $trg) {
+            return JsonResponse::make(['error' => 'Source and target airports cannot be the same'], 400);
+        }
+        
         $srcAirport = $this->airportRepository->findOne($src);
         $trgAirport = $this->airportRepository->findOne($trg);
         
@@ -36,12 +41,12 @@ class FlightsController extends BaseController {
             return JsonResponse::make(['error' => 'Trip does not exist'], 404);
         }
         
-        $existingFlights = $trip->flights()->get();
+        $existingFlights = $trip->getFlights();
         $alreadyExists = false;
         
         /* @var $flight Flight */
         foreach($existingFlights as $flight) {
-            if($flight->source->code === $src && $flight->target->code === $trg) {
+            if($flight->getSourceCode() === $src && $flight->getTargetCode() === $trg) {
                 $alreadyExists = true;
                 break;
             }
@@ -52,9 +57,9 @@ class FlightsController extends BaseController {
         }
 
         $flight = new Flight();
-        $flight->source()->associate($srcAirport);
-        $flight->target()->associate($trgAirport);
-        $trip->flights()->associate($flight);
+        $flight->setSource($srcAirport);
+        $flight->setTarget($trgAirport);
+        $trip->addFlight($flight);
         $trip->save();
                 
         return JsonResponse::make($trip);
@@ -69,15 +74,17 @@ class FlightsController extends BaseController {
             return JsonResponse::make(['error' => 'Trip does not exist'], 404);
         }
         
-        $existingFlights = $trip->flights()->get();
+        $existingFlights = $trip->getFlights();
         
         /* @var $flight Flight */
         foreach($existingFlights as $flight) {
-            if($flight->source->code === $src && $flight->target->code === $trg) {
-                $trip->flights()->destroy($flight->_id);
+            if($flight->getSourceCode() === $src && $flight->getTargetCode() === $trg) {
+                $trip->removeFlight($flight);
                 break;
             }
         }
+        
+        $trip->save();
         
         return JsonResponse::make($trip);
     }

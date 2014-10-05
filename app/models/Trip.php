@@ -26,4 +26,19 @@ class Trip extends Eloquent {
         {
             return $this->embedsMany('Flight');
         }
+        
+        public function addFlight(Flight $flight)
+        {
+            $this->flights()->associate($flight);
+        }
+        
+        public function getFlights()
+        {
+            return $this->flights()->get();
+        }
+        
+        public function removeFlight(Flight $flight)
+        {
+            $this->flights()->destroy($flight->_id);
+        }
 }

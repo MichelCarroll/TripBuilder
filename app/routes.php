@@ -30,8 +30,8 @@ Route::put('/trips/{id}', 'TripsController@update')->where('id', '[a-z0-9]+');
 
 // adding a flight to a trip
 Route::put('/trips/{id}/flights/{src},{trg}', 'FlightsController@create')
-    ->where(['id' => '[a-z0-9]+', 'src' => '[A-Z]+', 'trg' => '[A-Z]+']);
+    ->where(['id' => '[a-z0-9]+', 'src' => '[A-Z]{3}', 'trg' => '[A-Z]{3}']);
 
 // removing a flight from a trip
 Route::delete('/trips/{id}/flights/{src},{trg}', 'FlightsController@delete')
-    ->where(['id' => '[a-z0-9]+', 'src' => '[A-Z]+', 'trg' => '[A-Z]+']);
+    ->where(['id' => '[a-z0-9]+', 'src' => '[A-Z]{3}', 'trg' => '[A-Z]{3}']);
