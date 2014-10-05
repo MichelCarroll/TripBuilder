@@ -3,14 +3,21 @@
 class TripsController extends BaseController {
 
     /**
-     * @var TripRepositoryInterface 
+     * @var ITripRepository 
      */
     private $tripRepository;
     
-    public function __construct(TripRepositoryInterface $tripRepository) {
+    /**
+     * @param ITripRepository $tripRepository
+     */
+    public function __construct(ITripRepository $tripRepository) {
         $this->tripRepository = $tripRepository;
     }
     
+    /**
+     * @param string $id
+     * @return Illuminate\Support\Facades\Response
+     */
     public function get($id)
     {
         $trip = $this->tripRepository->findOne($id);
@@ -22,6 +29,9 @@ class TripsController extends BaseController {
         return JsonResponse::make($trip);
     }
     
+    /**
+     * @return Illuminate\Support\Facades\Response
+     */
     public function create()
     {
         $trip = $this->tripRepository->create();
@@ -34,6 +44,10 @@ class TripsController extends BaseController {
     }
     
     
+    /**
+     * @param string $id
+     * @return Illuminate\Support\Facades\Response
+     */
     public function update($id)
     {
         $trip = $this->tripRepository->findOne($id);

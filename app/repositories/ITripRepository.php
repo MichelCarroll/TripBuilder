@@ -1,7 +1,7 @@
 <?php
 
 
-interface TripRepositoryInterface {
+interface ITripRepository {
 
     /**
      * @param string $id

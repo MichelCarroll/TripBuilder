@@ -15,7 +15,6 @@ class Airport extends Eloquent {
 
         protected $fillable = array("code", "city", "description");
         
-        
         protected $guarded = array("id");
 
 

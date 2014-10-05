@@ -1,7 +1,7 @@
 <?php
 
 
-class MongoTripRepository implements TripRepositoryInterface  {
+class MongoTripRepository implements ITripRepository  {
 
     /**
      * 

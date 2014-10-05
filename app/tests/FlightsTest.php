@@ -156,13 +156,13 @@ class FlightsTest extends TestCase {
             }
         }
         
-        $mockTripRepo = $this->getMock('TripRepositoryInterface');
+        $mockTripRepo = $this->getMock('ITripRepository');
         $mockTripRepo->expects($this->any())
             ->method('findOne')
             ->with($fakeId)
             ->will($this->returnValue($trip));
         
-        $this->app->bind('TripRepositoryInterface', function() use ($mockTripRepo) {
+        $this->app->bind('ITripRepository', function() use ($mockTripRepo) {
             return $mockTripRepo;
         });
         
@@ -181,12 +181,12 @@ class FlightsTest extends TestCase {
             [$this->trgCode, $trgAirport],
         ];
         
-        $mockAirRepo = $this->getMock('AirportRepositoryInterface');
+        $mockAirRepo = $this->getMock('IAirportRepository');
         $mockAirRepo->expects($this->any())
             ->method('findOne')
             ->will($this->returnValueMap($valMap));
         
-        $this->app->bind('AirportRepositoryInterface', function() use ($mockAirRepo) {
+        $this->app->bind('IAirportRepository', function() use ($mockAirRepo) {
             return $mockAirRepo;
         });
         

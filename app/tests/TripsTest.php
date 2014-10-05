@@ -16,13 +16,13 @@ class TripsTest extends TestCase {
         
         $returnVal = $findTrip ? $this->_getFakeTrip($fakeId) : null;
         
-        $mock = $this->getMock('TripRepositoryInterface');
+        $mock = $this->getMock('ITripRepository');
         $mock->expects($this->once())
             ->method('findOne')
             ->with($fakeId)
             ->will($this->returnValue($returnVal));
         
-        $this->app->bind('TripRepositoryInterface', function() use ($mock) {
+        $this->app->bind('ITripRepository', function() use ($mock) {
             return $mock;
         });
         

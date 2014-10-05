@@ -3,15 +3,20 @@
 class AirportsController extends BaseController {
 
     /**
-     * @var AirportRepositoryInterface 
+     * @var IAirportRepository 
      */
     private $airportRepository;
     
-    public function __construct(AirportRepositoryInterface $airportRepo) {
+    /**
+     * @param IAirportRepository $airportRepo
+     */
+    public function __construct(IAirportRepository $airportRepo) {
         $this->airportRepository = $airportRepo;
     }
     
-
+    /**
+     * @return Illuminate\Support\Facades\Response
+     */
     public function getAll()
     {
         $airports = $this->airportRepository->getAll();

@@ -28,27 +28,38 @@ class Flight extends Eloquent {
             return $this->embedsOne('Airport');
         }
         
-        
         public function target()
         {
             return $this->embedsOne('Airport');
         }
         
+        /**
+         * @param Airport $source
+         */
         public function setSource(Airport $source)
         {
             $this->source()->associate($source);
         }
         
+        /**
+         * @param Airport $target
+         */
         public function setTarget(Airport $target)
         {
             $this->target()->associate($target);
         }
         
+        /**
+         * @return string
+         */
         public function getSourceCode()
         {
             return $this->source->code;
         }
         
+        /**
+         * @return string
+         */
         public function getTargetCode()
         {
             return $this->target->code;

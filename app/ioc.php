@@ -1,4 +1,4 @@
 <?php
 
-App::bind('AirportRepositoryInterface', 'MongoAirportRepository');
-App::bind('TripRepositoryInterface', 'MongoTripRepository');
+App::bind('IAirportRepository', 'MongoAirportRepository');
+App::bind('ITripRepository', 'MongoTripRepository');

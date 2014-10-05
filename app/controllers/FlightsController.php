@@ -3,21 +3,30 @@
 class FlightsController extends BaseController {
 
     /**
-     * @var TripRepositoryInterface 
+     * @var ITripRepository 
      */
     private $tripRepository;
     /**
-     * @var AirportRepositoryInterface 
+     * @var IAirportRepository 
      */
     private $airportRepository;
     
-    public function __construct(TripRepositoryInterface $tripRepository, AirportRepositoryInterface $airportRepository) 
+    /**
+     * @param ITripRepository $tripRepository
+     * @param IAirportRepository $airportRepository
+     */
+    public function __construct(ITripRepository $tripRepository, IAirportRepository $airportRepository) 
     {
         $this->tripRepository = $tripRepository;
         $this->airportRepository = $airportRepository;
     }
     
-    
+    /**
+     * @param string $id
+     * @param string $src
+     * @param string $trg
+     * @return Illuminate\Support\Facades\Response
+     */
     public function create($id, $src, $trg)
     {
         if($src === $trg) {
@@ -65,7 +74,12 @@ class FlightsController extends BaseController {
         return JsonResponse::make($trip);
     }
     
-    
+    /**
+     * @param string $id
+     * @param string $src
+     * @param string $trg
+     * @return Illuminate\Support\Facades\Response
+     */
     public function delete($id, $src, $trg)
     {
         $trip = $this->tripRepository->findOne($id);

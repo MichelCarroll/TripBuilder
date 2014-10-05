@@ -24,12 +24,12 @@ class AirportsTest extends TestCase {
             $this->_getFakeAirport()
         );
         
-        $mock = $this->getMock('AirportRepositoryInterface');
+        $mock = $this->getMock('IAirportRepository');
         $mock->expects($this->once())
             ->method('getAll')
             ->will($this->returnValue($data));
         
-        $this->app->bind('AirportRepositoryInterface', function() use ($mock) {
+        $this->app->bind('IAirportRepository', function() use ($mock) {
             return $mock;
         });
         
