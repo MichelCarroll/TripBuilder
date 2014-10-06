@@ -1,24 +1,27 @@
 ## Trip Builder
 
-# Installation
+### Installation
 
-make sure you have at least  vagrant 1.5, or apt-get install vagrant if you need it
-make sure "virtualization technology" is enabled on your bios. otherwise, vm won't boot
+#### Prerequisites
 
-git clone https://github.com/MichelCarroll/TripBuilder.git tripbuilder
-cd tripbuilder
-cp vagrant/configs.dist.yaml vagrant/configs.yaml
-change the ~/workspace/tripbuilder/ to where the project actually is
-change the ip, if you want
-add tripbuilder.app to your hosts file
-vagrant up
-vagrant ssh
-cd workspace/tripbuilder
-composer install
-php artisan mongo:schema
-php artisan mongo:seed
-phpunit   (tests should all pass)
-visit http://tripbuilder.app:8000/ to see the test harness
+Vagrant (at least v1.5) with hardware virtualization enabled
+
+#### Procedure
+
+1. `git clone https://github.com/MichelCarroll/TripBuilder.git tripbuilder`
+2. `cd tripbuilder`
+3. `cp vagrant/configs.dist.yaml vagrant/configs.yaml`
+4. Inside `configs.yaml`, change `~/workspace/tripbuilder/` to where the project actually is
+5. Change the IP from `192.168.10.10` to something else, if you want
+6. Add `tripbuilder.app` to your hosts file
+7. `vagrant up`
+8. `vagrant ssh`
+9. `cd workspace/tripbuilder`
+10. `composer install`
+11. `php artisan mongo:schema`
+12. `php artisan mongo:seed`
+13. `phpunit` (tests should all pass at this point)
+14. Visit http://tripbuilder.app:8000/ to check out the test harness
 
 
 architectural decisions:
