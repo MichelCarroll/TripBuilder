@@ -26,13 +26,13 @@ Add a flight to a trip. The SRC and TRG are the three-letter airport codes.
 
 Remove a flight from a trip. The SRC and TRG are the three-letter airport codes.
 
-### Installation
+## Installation
 
-#### Prerequisites
+### Prerequisites
 
 Vagrant (at least v1.5) with hardware virtualization enabled.
 
-#### Procedure
+### Procedure
 
 1. `git clone https://github.com/MichelCarroll/TripBuilder.git tripbuilder`
 2. `cd tripbuilder`
