@@ -4,7 +4,7 @@
 
 #### Prerequisites
 
-Vagrant (at least v1.5) with hardware virtualization enabled
+Vagrant (at least v1.5) with hardware virtualization enabled.
 
 #### Procedure
 
@@ -42,7 +42,7 @@ I decided to use MongoDB for data persistance because:
 
 ## What could be done better
 
-- The mongo orm implementation includes many superfluous details, such as the _id of every embedded document in the trips. These should not be sent to the client because they don't need to know them, and might make the API's clients dependent on one of our implementation details, as opposed to a consistant interface.
+- The Mongo ORM implementation includes many superfluous details, such as the _id of every embedded document in the trips. These should not be sent to the client because they don't need to know them, and might make the API's clients dependent on one of our implementation details, as opposed to a consistant interface.
 
 - Some unit tests use Mongo queries. The objects that are doing so should be mocked, to eliminate the dependency on the database for unit testing.
 
