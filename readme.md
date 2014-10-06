@@ -42,8 +42,8 @@ I decided to use MongoDB for data persistance because:
 
 ## What could be done better
 
-- the mongo orm implementation includes many superfluous details, such as the _id of every embedded document in the trips. these should not be sent to the client, as they're not necessary, and might make the API's clients dependend on one of our implementation details, as opposed to a consistant interface
+- The mongo orm implementation includes many superfluous details, such as the _id of every embedded document in the trips. These should not be sent to the client because they don't need to know them, and might make the API's clients dependent on one of our implementation details, as opposed to a consistant interface.
 
-- some unit tests use Mongo. the objects that are doing so should be mocked, to eliminate the dependency on the database for unit testing
+- Some unit tests use Mongo queries. The objects that are doing so should be mocked, to eliminate the dependency on the database for unit testing.
 
-- some unit tests are incomplete. example, the test for GET trips does not validate that the flight information is also returned
+- Some unit tests are incomplete. Example: the test for GET trips does not validate that the flight information is also returned
