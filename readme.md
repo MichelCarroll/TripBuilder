@@ -1,4 +1,30 @@
-## Trip Builder
+# Trip Builder
+
+## API Routes
+
+##### GET /airports
+
+Get list of all airport. (alphabetically by city)
+
+##### POST /trips
+
+Create a new trip. Takes "name" as optional request parameter.
+
+##### PUT /trips/{id}
+
+Rename a trip, through the "name" request parameter.
+
+##### GET /trips/{id}
+
+View a trip, along with a list of all its flights.
+
+##### PUT /trips/{id}/flights/{src},{trg}
+
+Add a flight to a trip. The SRC and TRG are the three-letter airport codes.
+
+##### DELETE /trips/{id}/flights/{src},{trg}
+
+Remove a flight from a trip. The SRC and TRG are the three-letter airport codes.
 
 ### Installation
 
