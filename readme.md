@@ -21,17 +21,26 @@ Vagrant (at least v1.5) with hardware virtualization enabled
 11. `php artisan mongo:schema`
 12. `php artisan mongo:seed`
 13. `phpunit` (tests should all pass at this point)
-14. Visit http://tripbuilder.app:8000/ to check out the test harness
+14. Visit `http://tripbuilder.app:8000/` to check out the test harness
+15. OR check out the live version at `http://ec2-54-69-221-31.us-west-2.compute.amazonaws.com/`
 
 
-architectural decisions:
+## Architectural Decisions
 
-- decided on implementing a RESTful webservice, because:
+I decided to implement a RESTful webservice, because:
    - entities are simple, and most operations can easily be described by simple HTTP methods (GET, PUT, DELETE)
    - REST APIs are ubiquitous, and easy for API clients to adopt
 
+I decided to use Laravel framework because:
+   - implementing a RESTful webservice is rediculously easy within Laravel
+   - it's lightweight, and the architecture is simple and easy to understand
+ 
+I decided to use MongoDB for data persistance because:
+   - it made developing the models very quick, because the schema is flexible
+   - the objects were simple enough to represent in document form, and there were no need for complex joins
 
-what could be done better, and improved:
+
+## What could be done better
 
 - the mongo orm implementation includes many superfluous details, such as the _id of every embedded document in the trips. these should not be sent to the client, as they're not necessary, and might make the API's clients dependend on one of our implementation details, as opposed to a consistant interface
 
